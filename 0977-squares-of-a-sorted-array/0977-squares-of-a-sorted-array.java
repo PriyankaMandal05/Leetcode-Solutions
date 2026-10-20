@@ -55,19 +55,19 @@ class Solution {
 
         }
         int index = 0; // for result list
-        List<Integer> result = new ArrayList<>(negetive.size() + positive.size());
+        int[] result = new int[negetive.size() + positive.size()];
          
 
         // Merging two sorted arrays
         int i =0 ; int j=0;
         while(i < negetive.size() &&  j < positive.size()){
         if(negetive.get(i) <= positive.get(j)){
-           result.add( negetive.get(i));
+           result[index] = negetive.get(i);
             index++;
             i++;
         }
         else {
-             result.add(positive.get(j));
+             result[index] = positive.get(j);
             index++;
             j++;
         }
@@ -76,13 +76,13 @@ class Solution {
 
         // when j out of array.
         while( i < negetive.size()){
-             result.add(negetive.get(i));
+            result[index] = negetive.get(i);
             index++;
             i++;
         }
         // when i out of array.
         while( j < positive.size()){
-             result.add( positive.get(j));
+             result[index] = positive.get(j);
             index++;
             j++;
         }
@@ -91,7 +91,7 @@ class Solution {
 
 
 
-       return result.stream().mapToInt(Integer::intValue).toArray();
+       return result;
        
 
     }
