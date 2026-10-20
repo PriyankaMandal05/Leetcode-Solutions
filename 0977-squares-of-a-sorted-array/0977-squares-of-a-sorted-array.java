@@ -1,13 +1,99 @@
 class Solution {
     public int[] sortedSquares(int[] nums) {
-        int[] result = new int[nums.length];
-        for (int i = 0; i < nums.length; i++) {
-            result[i] = nums[i] * nums[i];
-           
+       List<Integer> negetive = new ArrayList<>();
+       List<Integer> positive = new ArrayList<>();
+       // add + /- no. in lists
+       for(int i = 0; i< nums.length ; i++){
+        if(nums[i] >= 0){
+            positive.add(nums[i]);
 
         }
-         Arrays.sort(result);
-        return result;
+        else{
+            negetive.add(nums[i]);
+        }
+        }
+
+        // check whether +/ - no. are there or not
+
+       
+       if(positive.size() == 0){
+        // means only neg no. 
+        for(int i=0; i< negetive.size(); i++){
+            negetive.set(i, negetive.get(i) * negetive.get(i));
+            }
+            Collections.reverse(negetive);
+            return negetive.stream().mapToInt(Integer::intValue).toArray();
+        
+
+       }
+     if(negetive.size() == 0){
+        // means only positive no. 
+        for(int i=0; i< positive.size(); i++){
+        positive.set(i, positive.get(i) * positive.get(i));
+        }
+        return positive.stream().mapToInt(Integer::intValue).toArray();
+
+       }
+
+        
+       
+
+       
+        // if both +ve  and -ve numbers present 
+        // hence, positive and negetive lists BOTH != 0
+        
+        
+        //  Squaring the lists
+        for(int i=0; i<negetive.size(); i++ ){
+            negetive.set(i, negetive.get(i) * negetive.get(i));
+
+        }
+        Collections.reverse(negetive);
+
+        for(int i=0; i<positive.size(); i++ ){
+            positive.set(i, positive.get(i) * positive.get(i));
+
+        }
+        int index = 0; // for result list
+        List<Integer> result = new ArrayList<>(negetive.size() + positive.size());
+         
+
+        // Merging two sorted arrays
+        int i =0 ; int j=0;
+        while(i < negetive.size() &&  j < positive.size()){
+        if(negetive.get(i) <= positive.get(j)){
+           result.add( negetive.get(i));
+            index++;
+            i++;
+        }
+        else {
+             result.add(positive.get(j));
+            index++;
+            j++;
+        }
+        } // while loop over => means both i & j out of array ot atleast one.
+
+
+        // when j out of array.
+        while( i < negetive.size()){
+             result.add(negetive.get(i));
+            index++;
+            i++;
+        }
+        // when i out of array.
+        while( j < positive.size()){
+             result.add( positive.get(j));
+            index++;
+            j++;
+        }
+
+
+
+
+
+       return result.stream().mapToInt(Integer::intValue).toArray();
+       
+
     }
 }
 
