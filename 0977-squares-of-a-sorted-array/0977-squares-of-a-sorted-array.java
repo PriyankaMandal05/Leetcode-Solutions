@@ -1,7 +1,15 @@
 class Solution {
     public int[] sortedSquares(int[] nums) {
+       // CURRENT CODE ANALYSIS:
+       // Logic: Splitting numbers into two lists (negative and positive), squaring them, 
+       // reversing the negative list to make it sorted, and then merging them.
+       // Time Complexity: O(N) - One pass to split, one pass to square, and one pass to merge.
+       // Space Complexity: O(N) - Using two additional lists and a result array.
+       
+
        List<Integer> negetive = new ArrayList<>();
        List<Integer> positive = new ArrayList<>();
+       
        // add + /- no. in lists
        for(int i = 0; i< nums.length ; i++){
         if(nums[i] >= 0){
@@ -15,7 +23,7 @@ class Solution {
 
         // check whether +/ - no. are there or not
 
-       
+        int[] result = new int[negetive.size() + positive.size()];
        if(positive.size() == 0){
         // means only neg no. 
         for(int i=0; i< negetive.size(); i++){
@@ -26,7 +34,7 @@ class Solution {
         
 
        }
-     if(negetive.size() == 0){
+     else if(negetive.size() == 0){
         // means only positive no. 
         for(int i=0; i< positive.size(); i++){
         positive.set(i, positive.get(i) * positive.get(i));
@@ -38,12 +46,11 @@ class Solution {
         
        
 
-       
+       else{
         // if both +ve  and -ve numbers present 
         // hence, positive and negetive lists BOTH != 0
         
-        
-        //  Squaring the lists
+        // Squaring the lists
         for(int i=0; i<negetive.size(); i++ ){
             negetive.set(i, negetive.get(i) * negetive.get(i));
 
@@ -55,10 +62,9 @@ class Solution {
 
         }
         int index = 0; // for result list
-        int[] result = new int[negetive.size() + positive.size()];
          
 
-        // Merging two sorted arrays
+        // Merging two sorted arrays (TWO POINTER ***)
         int i =0 ; int j=0;
         while(i < negetive.size() &&  j < positive.size()){
         if(negetive.get(i) <= positive.get(j)){
@@ -89,10 +95,10 @@ class Solution {
 
 
 
+       }
 
-
-       return result;
        
+       return result;
 
     }
 }
