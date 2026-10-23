@@ -1,34 +1,42 @@
 class Solution {
     public void sortColors(int[] nums) {
-        int low = 0;
-        int mid = 0;
-        int high = nums.length - 1;
-        while (mid <= high) {
-            switch (nums[mid]) {
-                case 0:
-                   
-                    int temp = nums[mid];
-                    nums[mid] = nums[low];
-                    nums[low] = temp;
-                    mid++;
-                    low++;
-                    break;
-
-                case 1:
-                    // BEST CASE
-                    mid++;
-                    break;
-
-                case 2:
-                    temp = nums[mid];
-                    nums[mid] = nums[high];
-                    nums[high] = temp;
-                    high--;
-                    break;
+        int zero =0;
+        int one =0;
+        int two = 0;
+        for(int i=0; i< nums.length; i++){
+            if(nums[i] == 0){
+                zero ++;
+            }
+            else if(nums[i] == 1){
+                one ++;
+            }
+            else {
+                two ++;
             }
         }
+        for(int i=0; i< nums.length; i++){
+            
 
+
+        while (zero > 0) {
+            nums[i++] = 0;
+            zero--;
+        }
+
+        while (one > 0) {
+            nums[i++] = 1;
+            one--;
+        }
+
+        while (two > 0) {
+            nums[i++] = 2;
+            two--;
+        }
     }
+
+
+        }
+    
 }
 
 // Synced seamlessly with LeetHub Pro
