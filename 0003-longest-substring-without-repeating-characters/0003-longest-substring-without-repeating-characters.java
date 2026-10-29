@@ -21,6 +21,8 @@ class Solution {
                 k = high - low +1;
 
             }
+            // here means, map.size() == k
+            // BCZ CAN'T*  BE > K
 
             int len = high - low +1;
             result = Math.max(len, result);
