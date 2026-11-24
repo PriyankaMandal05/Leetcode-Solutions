@@ -1,5 +1,9 @@
 class Solution {
     public int removeDuplicates(int[] nums) {
+
+        if(nums.length <=2){ //if array len = 1
+            return nums.length; //returns 1
+        }
         int i = 2; //traverse array
         int j=2; // decides position
         while(i< nums.length){
